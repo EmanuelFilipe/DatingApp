@@ -1,5 +1,6 @@
 using API.Data;
 using API.Interfaces;
+using API.Middlaware;
 using API.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -38,6 +39,7 @@ var app = builder.Build();
 
 //app.UseAuthorization();
 
+app.UseMiddleware<ExceptionMiddleware>();
 app.UseCors(c =>
 {
     c.AllowAnyHeader();
