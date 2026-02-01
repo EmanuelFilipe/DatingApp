@@ -1,4 +1,5 @@
 using API.Data;
+using API.Data.Repositories;
 using API.Interfaces;
 using API.Middlaware;
 using API.Services;
@@ -18,8 +19,17 @@ builder.Services.AddDbContext<AppDbContext>(opt =>
 });
 
 builder.Services.AddCors();
+
+#region [D. I.]
+
 // scoped - cria uma instancia unica por requisição http. Quando a requisição termina, a instancia é descartada.
 builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<IMemberRepository, MemberRepository>();
+
+#endregion
+
+#region [Jwt Bearer Configuration]
+
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
@@ -34,12 +44,16 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateAudience = false
         };
     });
+#endregion
 
 var app = builder.Build();
 
 //app.UseAuthorization();
 
 app.UseMiddleware<ExceptionMiddleware>();
+
+#region [Use Cors]
+
 app.UseCors(c =>
 {
     c.AllowAnyHeader();
@@ -47,10 +61,30 @@ app.UseCors(c =>
     c.WithOrigins("https://localhost:4200", "http://localhost:4200");
 });
 
+#endregion
+
 app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+#region [Seed Data]
+
+using var scope = app.Services.CreateScope();
+var services = scope.ServiceProvider;
+try
+{
+    var context = services.GetRequiredService<AppDbContext>();
+    await context.Database.MigrateAsync();
+    await Seed.SeedUsers(context);
+}
+catch (Exception ex)
+{
+    var logger = services.GetRequiredService<ILogger<Program>>();
+    logger.LogError(ex, "An error occurred during migration");
+}
+
+#endregion
 
 app.Run();
 
