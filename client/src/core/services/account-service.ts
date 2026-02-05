@@ -4,13 +4,15 @@ import { User } from '../../types/users'
 import { tap } from 'rxjs';
 import { RegisterCreds } from '../../types/register-creds';
 import { LoginCreds } from '../../types/login-creds';
+import { environment } from '../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AccountService {
   private http = inject(HttpClient)
-  protected baseUrl = 'https://localhost:5001/api'
+  private baseUrl = environment.apiUrl
+  
   currentUser = signal<User | null>(null)
 
   register(creds: RegisterCreds) {
@@ -41,4 +43,5 @@ export class AccountService {
     localStorage.removeItem('user')
     this.currentUser.set(null)
   }
+
 }

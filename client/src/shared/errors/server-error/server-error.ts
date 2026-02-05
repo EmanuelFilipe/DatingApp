@@ -14,7 +14,6 @@ export class ServerError {
   protected showDetails = false
 
   constructor() {
-    debugger
     const navigation = this.router.getCurrentNavigation()
     this.error = navigation?.extras.state?.['error']
   }
