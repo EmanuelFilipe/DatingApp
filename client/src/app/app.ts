@@ -3,6 +3,7 @@ import { Component, inject } from '@angular/core';
 //import { lastValueFrom } from 'rxjs';
 import { Nav } from "../layout/nav/nav";
 import { Router, RouterOutlet } from '@angular/router';
+import { BusyService } from '../core/services/busy-service';
 
 @Component({
   selector: 'app-root',
@@ -12,6 +13,8 @@ import { Router, RouterOutlet } from '@angular/router';
 })
 export class App  {
   protected router = inject(Router)
+  protected busyService = inject(BusyService);
+  
   // private http = inject(HttpClient)
 
   // protected readonly title = 'Dating App'

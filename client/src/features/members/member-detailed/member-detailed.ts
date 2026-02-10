@@ -1,8 +1,10 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { filter } from 'rxjs';
 import { Member } from '../../../types/member';
 import { AgePipe } from '../../../core/pipes/age-pipe';
+import { AccountService } from '../../../core/services/account-service';
+import { MemberService } from '../../../core/services/member-service';
 
 @Component({
   selector: 'app-member-detailed',
@@ -14,17 +16,21 @@ export class MemberDetailed implements OnInit {
   // da acesso aos parametros na url
   private route = inject(ActivatedRoute)
   private router = inject(Router)
-  
-  protected member = signal<Member | undefined>(undefined)
+  private accountService = inject(AccountService)
+  protected memberService = inject(MemberService) // we´ll access inside the component
+
   protected title = signal<string | undefined>('Profile')
+  protected isCurrentUser = computed(() => {
+    return this.accountService.currentUser()?.id === this.route.snapshot.paramMap.get('id')
+  })
 
   ngOnInit() {
-    this.route.data.subscribe({
-      next: data => {
-        // obtem o valor retornado do resolver
-        this.member.set(data['member'])
-      }
-    })
+    // this.route.data.subscribe({
+    //   next: data => {
+    //     // obtem o valor retornado do resolver
+    //     this.member.set(data['member'])
+    //   }
+    // })
     this.title.set(this.route.firstChild?.snapshot?.title)
 
     this.router.events.pipe(

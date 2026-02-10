@@ -12,7 +12,6 @@ import { themes } from '../theme';
   styleUrl: './nav.css',
 })
 export class Nav implements OnInit {
-
   protected accountService = inject(AccountService)
   private router = inject(Router)
   private toast = inject(ToastService)
@@ -29,6 +28,7 @@ export class Nav implements OnInit {
   }
 
   login(): void {
+    debugger
     this.accountService.login(this.creds).subscribe({
       next: response => {
         this.toast.success('Logged in successfully!')

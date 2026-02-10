@@ -1,5 +1,12 @@
 <app-nav />
 
+<!-- SPINNER -->
+@if (busyService.busyRequestCount() > 0) {
+  <div class="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+    <span class="loading loading-spinner loading-xl text-accent"></span>
+  </div>
+}
+
 <div 
   [class.mt-24]="router.url !== '/'"
   [class.container]="router.url !== '/'"

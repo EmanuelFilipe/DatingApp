@@ -24,6 +24,7 @@ export class AccountService {
   }
 
   login(creds: LoginCreds) {
+    debugger
     // tap = permite fazer alterações mas sem modificar os dados recebidos
     return this.http.post<User>(`${this.baseUrl}/account/login`, creds).pipe(
       tap(user => {
