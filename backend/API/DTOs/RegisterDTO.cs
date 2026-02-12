@@ -8,7 +8,7 @@ namespace API.DTOs
         public string DisplayName { get; set; } = string.Empty;
 
         [Required]
-        [EmailAddress]
+        //[EmailAddress]
         [RegularExpression(@"^[^@\s]+@[^@\s]+\.[^@\s]+$", ErrorMessage = "Invalid Email")]
         public string Email { get; set; } = string.Empty;
 

@@ -65,3 +65,9 @@ For more information on using the Angular CLI, including detailed command refere
 # at style.css file
 @import "tailwindcss";
 @plugin "daisyui";
+
+# for running cypress - e2e execute this command:
+npx cypress open
+
+# for running cypress - headless execute this command:
+npx cypress run

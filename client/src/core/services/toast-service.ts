@@ -17,9 +17,21 @@ export class ToastService {
     }
   }
 
+  compareTextSpanElement(toastContainer: HTMLElement, message: string): boolean {
+
+    if (toastContainer) {
+      const span = toastContainer.querySelector('span')
+      if (span && span.textContent) {
+        if (span.textContent === message) return true
+      }
+    }
+
+    return false
+  }
+
   private createToastElement(message: string, alertClass: string, duration = 5000) {
     const toastContainer = document.getElementById('toast-container')
-    if (!toastContainer) return
+    if (!toastContainer || this.compareTextSpanElement(toastContainer, message)) return
 
     const toast = document.createElement('div')
     toast.classList.add('alert', alertClass, 'shadow-lg')
@@ -46,7 +58,9 @@ export class ToastService {
   }
 
   error(message: string, duration?: number) {
-    this.createToastElement(message, 'alert-error', duration)
+    if (message !== undefined) {
+      this.createToastElement(message, 'alert-error', duration)
+    }
   }
 
   warning(message: string, duration?: number) {

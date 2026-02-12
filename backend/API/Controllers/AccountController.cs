@@ -36,9 +36,12 @@ namespace API.Controllers
         [HttpPost("login")]
         public async Task<ActionResult<UserDTO>> Login(LoginDTO loginDTO) 
         {
+            if (string.IsNullOrEmpty(loginDTO.Email) || string.IsNullOrEmpty(loginDTO.Password)) 
+                return BadRequest("Email and Password are required");
+
             var user = await context.Users.SingleOrDefaultAsync(u => u.Email == loginDTO.Email);
 
-            if (user is null) return Unauthorized("Invalid email");
+            if (user is null) return Unauthorized("Email not founded");
 
             using var hmac = new HMACSHA512(user.PasswordSalt);
 

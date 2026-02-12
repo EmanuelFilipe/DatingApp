@@ -16,19 +16,22 @@ export class AccountService {
   currentUser = signal<User | null>(null)
 
   register(creds: RegisterCreds) {
-    return this.http.post<User>(`${this.baseUrl}/account/register`, creds).pipe(
-      tap(user => {
-        this.setCurrentUser(user)
-      })
-    )
+    return this.http.post<User>(`${this.baseUrl}/account/register`, creds)
+
+    // return this.http.post<User>(`${this.baseUrl}/account/register`, creds).pipe(
+    //   tap(user => {
+    //     this.setCurrentUser(user)
+    //   })
+    // )
   }
 
   login(creds: LoginCreds) {
-    debugger
     // tap = permite fazer alterações mas sem modificar os dados recebidos
     return this.http.post<User>(`${this.baseUrl}/account/login`, creds).pipe(
       tap(user => {
-        this.setCurrentUser(user)
+        debugger
+        if(user)
+          this.setCurrentUser(user)
       })
     )
   }

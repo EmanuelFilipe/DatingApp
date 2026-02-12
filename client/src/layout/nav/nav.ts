@@ -28,15 +28,15 @@ export class Nav implements OnInit {
   }
 
   login(): void {
-    debugger
     this.accountService.login(this.creds).subscribe({
-      next: response => {
+      next: () => {
         this.toast.success('Logged in successfully!')
         this.creds = {}
         this.router.navigateByUrl('/members')
       },
       error: error => {
         this.toast.error(error.error)
+        debugger
       }
     })
   }
