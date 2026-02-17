@@ -1,5 +1,6 @@
 using API.Data;
 using API.Data.Repositories;
+using API.Helpers;
 using API.Interfaces;
 using API.Middlaware;
 using API.Services;
@@ -24,9 +25,12 @@ builder.Services.AddCors();
 
 // scoped - cria uma instancia unica por requisição http. Quando a requisição termina, a instancia é descartada.
 builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<IPhotoService, PhotoService>();
 builder.Services.AddScoped<IMemberRepository, MemberRepository>();
 
 #endregion
+
+builder.Services.Configure<CloudinarySettings>(builder.Configuration.GetSection("CloudinarySettings"));
 
 #region [Jwt Bearer Configuration]
 

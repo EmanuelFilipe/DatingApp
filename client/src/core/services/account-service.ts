@@ -37,10 +37,10 @@ export class AccountService {
   }
 
   setCurrentUser(user: User) {
-    if (user) {
+    //if (user) {
       localStorage.setItem('user', JSON.stringify(user))
       this.currentUser.set(user)
-    }
+    //}
   }
 
   logout() {
