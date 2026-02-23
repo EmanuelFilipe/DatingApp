@@ -1,0 +1,90 @@
+<div class="card bg-base-100 w-1/2 mx-auto flex flex-col p-6 rounded-lg shadow-lg">
+    <div id="title-create-user" class="card-title justify-center text-3xl text-primary">Sign Up</div>
+    <div class="card-body w-full">
+
+            <ul class="steps">
+                <li class="step" [class.step-primary]="currentStep() === 1">Credentials</li>
+                <li class="step" [class.step-primary]="currentStep() === 2">Profile</li>
+            </ul>
+
+        @if (currentStep() === 1) {
+            <form [formGroup]="credentialsForm" class="flex flex-col gap-4 w-full steps">
+                <app-text-input [id]="'email-user'" class="mt-3"
+                    label="Email" formControlName="email" />
+
+                <app-text-input [id]="'displayName-user'" 
+                    label="Display Name" formControlName="displayName" />                
+
+                <app-text-input [id]="'password-user'" 
+                    label="Password" formControlName="password" />                
+                    
+                <app-text-input [id]="'confirmPassword-user'" 
+                    label="Confirm Password" formControlName="confirmPassword" />                
+
+                <div class="flex items-center justify-end gap-3">
+                    <button id="btnCancel" type="button" (click)="cancel()" class="btn btn-default">Cancel</button>
+                    <button 
+                        [disabled]="!credentialsForm.valid"
+                        (click)="nextStep()"
+                        id="btnNextStep" type="button" class="btn btn-primary">Next</button>
+                </div>
+            </form>
+        }
+
+        @if (currentStep() === 2) {
+            <form [formGroup]="profileForm" class="flex flex-col w-full gap-4 steps">
+                
+                <div class="flex items-center gap-4">
+                    <div class="font-semibold">Gender:</div>
+                    <label class="flex gap-3 items-center">
+                        <span>Male</span>
+                        <input type="radio" formControlName="gender" value="male"
+                            class="radio radio-primary">
+                    </label>
+                    <label class="flex gap-3 items-center">
+                        <span>Female</span>
+                        <input type="radio" formControlName="gender" value="female"
+                            class="radio radio-primary">
+                    </label>
+                </div>
+                <app-text-input [id]="'dateOfBirth-user'" class="mt-3" type="date"
+                    [maxDate]="getMaxDate()"
+                    label="Date of Birth" formControlName="dateOfBirth" />
+                    
+                <app-text-input [id]="'city-user'" class="mt-3"
+                    label="City" formControlName="city" />
+
+                <app-text-input [id]="'country-user'" class="mt-3"
+                    label="Country" formControlName="country" />
+
+                <div class="flex items-center justify-end gap-3">
+                    <button id="btnBack" type="button" (click)="prevStep()" class="btn btn-default">Back</button>
+                    <button 
+                        [disabled]="!profileForm.valid"
+                        (click)="register()"
+                        id="btnRegister" type="button" class="btn btn-primary">Register</button>
+                </div>
+            </form>
+        }
+
+    </div>
+
+    <!-- EXIBIR VALORES DO FORMULÁRIO PARA TESTES 
+    <div class="flex flex-col items-start px-3 w-full mockup-code text-lg">
+        <div>Creds Value: {{ credentialsForm.value | json }}</div>
+        <div>Creds status: {{ credentialsForm.status | json }}</div>
+        <hr class="w-full border-gray-300 my-4">
+        <div>Profile Value: {{ profileForm.value | json }}</div>
+        <div>Profile status: {{ profileForm.status | json }}</div>
+    </div>-->
+
+    @if (validationErrors().length > 0) {
+        <div class="flex mt-5 gb-gray-200 rounded-2xl w-1/2 p-3 mx-auto">
+            <ul class="flex flex-col text-error space-y-1">
+                @for (error of validationErrors(); track $index) {
+                    <li>{{ error }}</li>
+                }
+            </ul>
+        </div>
+    }
+</div>

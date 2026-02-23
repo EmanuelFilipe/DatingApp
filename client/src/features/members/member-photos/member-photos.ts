@@ -22,7 +22,7 @@ export class MemberPhotos implements OnInit {
   protected memberService = inject(MemberService)
   protected photos = signal<Photo[]>([])
   protected loading = signal(false)
-  
+
   ngOnInit(): void {
     const memberId = this.route.parent?.snapshot.paramMap.get('id')
 
@@ -41,12 +41,16 @@ export class MemberPhotos implements OnInit {
   }
 
   onUploadImage(file: File) {
-    this.loading.set(true)  
+    this.loading.set(true)
     this.memberService.uploadPhoto(file).subscribe({
       next: photo => {
         this.memberService.editMode.set(false)
         this.loading.set(false)
         this.photos.update(photos => [...photos, photo])
+
+        if (!this.memberService.member()?.imageUrl) {
+          this.setMainLocalPhoto(photo)
+        }
       },
       error: error => {
         console.error('Error uploading photo:', error)
@@ -58,12 +62,7 @@ export class MemberPhotos implements OnInit {
   setMainPhoto(photo: Photo) {
     this.memberService.setMainPhoto(photo).subscribe({
       next: () => {
-        const currentUser = this.accountService.currentUser()
-        if (currentUser) currentUser.imgUrl = photo.url
-        this.accountService.setCurrentUser(currentUser as User)
-        this.memberService.member.update(member => ({
-          ...member, 
-          imageUrl: photo.url}) as Member)
+        this.setMainLocalPhoto(photo)
       },
       error: error => console.error('Error setting main photo:', error)
     })
@@ -75,6 +74,18 @@ export class MemberPhotos implements OnInit {
         this.photos.update(photos => photos.filter(p => p.id !== photo.id))
       },
       error: error => console.error('Error deleting photo:', error)
-    })  
+    })
+  }
+
+  private setMainLocalPhoto(photo: Photo) {
+
+    const currentUser = this.accountService.currentUser()
+    if (currentUser) currentUser.imgUrl = photo.url
+    this.accountService.setCurrentUser(currentUser as User)
+    this.memberService.member.update(member => ({
+      ...member,
+      imageUrl: photo.url
+    }) as Member)
+
   }
 }

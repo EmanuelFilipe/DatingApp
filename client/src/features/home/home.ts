@@ -1,18 +1,14 @@
-import { Component, Input, OnInit, signal } from '@angular/core';
-import { Register } from '../account/register/register';
+import { Component, Input, signal } from '@angular/core';
 import { User } from '../../types/users';
+import { RegisterSteps } from "../account/register-steps/register-steps";
 
 @Component({
   selector: 'app-home',
-  imports: [Register],
+  imports: [RegisterSteps],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
-export class Home implements OnInit {
-  ngOnInit(): void {
-    //console.log('home.ts::membersFromApp', this.membersFromApp)
-  }
-
+export class Home {
   @Input({required: true}) membersFromApp: User[] = []
   protected registerMode = signal(false)
 
