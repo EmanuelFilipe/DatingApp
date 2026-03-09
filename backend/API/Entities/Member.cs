@@ -24,5 +24,11 @@ namespace API.Entities
 
         [JsonIgnore]
         public List<Photo> Photos { get; set; } = [];
+
+        [JsonIgnore]
+        public List<MemberLike> LikedByMembers { get; set; } = []; // list of members that liked by others users
+        
+        [JsonIgnore]
+        public List<MemberLike> LikedMembers { get; set; } = []; // currently user likes
     }
 }
