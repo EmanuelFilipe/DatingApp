@@ -21,7 +21,7 @@ export const appConfig: ApplicationConfig = {
       return new Promise<void>((resolve) => {
         setTimeout(async () => {
           try {
-            return lastValueFrom(initialService.init())
+            await lastValueFrom(initialService.init())
           } finally {
             const splash = document.getElementById('initial-splash')
             if (splash) splash.remove()

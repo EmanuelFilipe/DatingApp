@@ -18,6 +18,7 @@
                 <a id="nav-members" routerLink="/members" routerLinkActive="text-accent" [routerLinkActiveOptions]="{exact: true}">Matches</a>
                 <a id="nav-lists" routerLink="/lists" routerLinkActive="text-accent">Lists</a>
                 <a id="nav-messages" routerLink="/messages" routerLinkActive="text-accent">Messages</a>
+                <a id="nav-admin" *appHasRole="['Admin', 'Moderator']" routerLink="/admin" routerLinkActive="text-accent">Admin</a>
             }
             <a routerLink="/errors" routerLinkActive="text-accent">Errors</a>
         </nav>
@@ -45,7 +46,7 @@
                 <div class="dropdown dropdown-end">
                     <div tabindex="0" role="button" 
                         class="flex items-center text-white text-xl gap-3 cursor-pointer">
-                        <img [src]="user.imgUrl" alt="user avatar" class="w-10 h-10 rounded-full">
+                        <img [src]="user.imgUrl ?? '/user.png'" alt="user avatar" class="w-10 h-10 rounded-full">
                         <span id="userName-logged">{{user.displayName}}</span>
                     </div>
                     <ul tabindex="-1" class="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm mt-1">

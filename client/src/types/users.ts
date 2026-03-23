@@ -4,4 +4,5 @@ export type User = {
     email: string;
     token: string;
     imgUrl?: string;
+    roles: string[];
 }

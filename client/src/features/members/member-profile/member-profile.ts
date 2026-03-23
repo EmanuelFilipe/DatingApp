@@ -54,7 +54,6 @@ export class MemberProfile implements OnInit, OnDestroy {
   updateProfile() {
     if (!this.memberService.member()) return
 
-    debugger
     const updatedMember = {...this.memberService.member(), ...this.editableMember}
     this.memberService.updateMember(updatedMember).subscribe({
       next: () => {

@@ -20,35 +20,60 @@ export class AccountService {
   register(creds: RegisterCreds) {
     //return this.http.post<User>(`${this.baseUrl}/account/register`, creds)
 
-    return this.http.post<User>(`${this.baseUrl}/account/register`, creds).pipe(
+    return this.http.post<User>(`${this.baseUrl}/account/register`, creds, { withCredentials: true}).pipe(
       tap(user => {
         this.setCurrentUser(user)
+        this.startTokenRefreshInterval()
       })
     )
   }
 
   login(creds: LoginCreds) {
     // tap = permite fazer alterações mas sem modificar os dados recebidos
-    return this.http.post<User>(`${this.baseUrl}/account/login`, creds).pipe(
+    return this.http.post<User>(`${this.baseUrl}/account/login`, creds, { withCredentials: true}).pipe(
       tap(user => {
-        debugger
-        if(user)
+        if(user) {
           this.setCurrentUser(user)
+          this.startTokenRefreshInterval()
+        }
       })
     )
   }
 
+  refreshToken() {
+    return this.http.post<User>(this.baseUrl + '/account/refresh-token', {}, {withCredentials: true})
+  }
+
+  startTokenRefreshInterval() {
+    setInterval(() => {
+      this.http.post<User>(this.baseUrl + '/account/refresh-token', {}, {withCredentials: true}).subscribe({
+        next: user => this.setCurrentUser(user),
+        error: () => {
+          this.logout()
+        }
+      })
+    }, 10 * 60 * 1000);
+  }
+
   setCurrentUser(user: User) {
-    localStorage.setItem('user', JSON.stringify(user))
+    user.roles = this.getRolesFromToken(user)
     this.currentUser.set(user)
     this.likesService.getLikeIds()
   }
 
   logout() {
-    localStorage.removeItem('user')
     localStorage.removeItem('filters')
     this.likesService.clearLikeIds()
     this.currentUser.set(null)
   }
 
-}
+  private getRolesFromToken(user: User): string[] {
+    const payload = user.token.split('.')[1]
+    const decoded = atob(payload) // decodific (base64) jwt token
+    console.log('token', decoded)
+    const jsonPayload = JSON.parse(decoded)
+    console.log('jsonPayload', jsonPayload)
+
+    return Array.isArray(jsonPayload.role) ? jsonPayload.role : [jsonPayload.role]
+  }
+ }

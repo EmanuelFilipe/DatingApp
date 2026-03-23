@@ -20,7 +20,7 @@ namespace API.Tests.Controllers
 
         private AccountController CreateController(AppDbContext context)
         {
-            return new AccountController(context, _mockTokenService.Object);
+            return new AccountController(null, _mockTokenService.Object);
         }
 
         [Fact]
@@ -36,8 +36,8 @@ namespace API.Tests.Controllers
                 Password = "1234"
             };
 
-            _mockTokenService.Setup(x => x.CreateToken(It.IsAny<AppUser>()))
-                .Returns("mocked_token");
+            //_mockTokenService.Setup(x => x.CreateToken(It.IsAny<AppUser>()))
+            //    .Returns("mocked_token");
 
             var result = controller.Register(registerDTO).Result;
 
