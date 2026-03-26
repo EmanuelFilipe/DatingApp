@@ -71,3 +71,8 @@ npx cypress open
 
 # for running cypress - headless execute this command:
 npx cypress run
+
+# SignalR
+npm i @microsoft/signalr
+updating variables on environments files
+presence-service

@@ -21,3 +21,7 @@ dotnet ef migrations has-pending-model-changes
 ## deleting database
 dotnet ef database drop
 'y' // confirm deletion
+
+# SignalR
+create SignalR folder > PresenceHub.css
+add AddSignalR on Program.css and .MapHub middleware que redireciona chamadas signalR para a classe PresenceHub.css
