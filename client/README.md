@@ -76,3 +76,10 @@ npx cypress run
 npm i @microsoft/signalr
 updating variables on environments files
 presence-service
+
+# Publicação frontend
+* angular.json >
+ "outputPath": {
+     "base": "../backend/API/wwwroot",  → ao executar `ng build` irá publicar o frontend nesse  diretório.
+     "browser": "" → evita criar subpasta 'browser', gerando todos os arquivos dentro da pasta wwwroot  no monento do `ng build`
+ }

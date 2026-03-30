@@ -1,4 +1,4 @@
-using API.Data;
+Ôªøusing API.Data;
 using API.Data.Repositories;
 using API.Entities;
 using API.Helpers;
@@ -8,9 +8,7 @@ using API.Services;
 using API.SignalR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration.EnvironmentVariables;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
@@ -21,19 +19,21 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddDbContext<AppDbContext>(opt =>
 {
-    opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
+    opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
 builder.Services.AddCors();
 
 #region [D. I.]
 
-// scoped - cria uma instancia unica por requisiÁ„o http. Quando a requisiÁ„o termina, a instancia È descartada.
+// scoped - cria uma instancia unica por requisi√ß√£o http. Quando a requisi√ß√£o termina, a instancia √© descartada.
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IPhotoService, PhotoService>();
-builder.Services.AddScoped<IMemberRepository, MemberRepository>();
-builder.Services.AddScoped<IMessageRepository, MessageRepository>();
-builder.Services.AddScoped<ILikesRepository, LikesRepository>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+// comentando pelo UnitOfWork
+//builder.Services.AddScoped<IMemberRepository, MemberRepository>();
+//builder.Services.AddScoped<IMessageRepository, MessageRepository>();
+//builder.Services.AddScoped<ILikesRepository, LikesRepository>();
 builder.Services.AddScoped<LogUserActivity>();
 builder.Services.AddSignalR();
 builder.Services.AddSingleton<PresenceTracker>();
@@ -115,9 +115,16 @@ app.UseCors(c =>
 app.UseAuthentication();
 app.UseAuthorization();
 
+// cria a pasta www na API
+app.UseDefaultFiles();
+// acesso a subpasta www e ativo o servi√ßo de arquivos est√°ticos
+app.UseStaticFiles();
+
 app.MapControllers();
 app.MapHub<PresenceHub>("hubs/presence");
 app.MapHub<MessageHub>("hubs/messages");
+// Qualquer rota que n√£o foi encontrada ‚Üí manda pro FallbackController
+app.MapFallbackToController("Index", "Fallback");
 
 #region [Seed Data]
 
@@ -128,7 +135,7 @@ try
     var context = services.GetRequiredService<AppDbContext>();
     var userManager = services.GetRequiredService<UserManager<AppUser>>();
     await context.Database.MigrateAsync();
-    await context.Connections.ExecuteDeleteAsync(); // ira apagar tudo da tabela Connections quando iniciar a aplicaÁ„o
+    await context.Connections.ExecuteDeleteAsync(); // ira apagar tudo da tabela Connections quando iniciar a aplica√ß√£o
     await Seed.SeedUsers(userManager);
 }
 catch (Exception ex)

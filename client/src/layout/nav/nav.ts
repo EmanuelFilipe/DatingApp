@@ -13,10 +13,10 @@ import { HasRole } from '../../shared/directives/has-role';
   styleUrl: './nav.css',
 })
 export class Nav implements OnInit {
-  protected accountService = inject(AccountService)
   private router = inject(Router)
   private toast = inject(ToastService)
-
+  protected loading = signal(false)
+  protected accountService = inject(AccountService)
   protected creds: any = {}
   protected selectedTheme = signal<string>(localStorage.getItem('theme') || 'light')
   protected avaliableThemes = themes
@@ -29,6 +29,7 @@ export class Nav implements OnInit {
   }
 
   login(): void {
+    this.loading.set(true)
     this.accountService.login(this.creds).subscribe({
       next: () => {
         this.toast.success('Logged in successfully!')
@@ -37,7 +38,8 @@ export class Nav implements OnInit {
       },
       error: error => {
         this.toast.error(error.error)
-      }
+      },
+      complete: () => this.loading.set(false)
     })
   }
 
@@ -50,10 +52,16 @@ export class Nav implements OnInit {
     this.selectedTheme.set(theme)
     localStorage.setItem('theme', theme)
 
-    //set theme on browser
+    // set theme on browser
     document.documentElement.setAttribute('data-theme', theme)
 
-    // closing dropdown after click o n any element
+    // closing dropdown after click on any element
+    const element = document.activeElement as HTMLDivElement
+    if (element) element.blur()
+  }
+
+  handleSelectUserItem() {
+    // closing dropdown after click on any element
     const element = document.activeElement as HTMLDivElement
     if (element) element.blur()
   }

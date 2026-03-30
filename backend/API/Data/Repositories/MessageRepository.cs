@@ -90,10 +90,5 @@ namespace API.Data.Repositories
             await context.Connections.Where(c => c.ConnectionId == connectionId)
                                      .ExecuteDeleteAsync();
         }
-
-        public async Task<bool> SaveAllAsync()
-        {
-            return await context.SaveChangesAsync() > 0;
-        }
     }
 }
