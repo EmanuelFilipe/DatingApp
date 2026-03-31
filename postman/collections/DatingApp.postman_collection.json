@@ -1,0 +1,1704 @@
+{
+	"info": {
+		"_postman_id": "8a35d469-6a15-44de-b63e-a5952fb1fbdd",
+		"name": "DatingApp",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Section 2",
+			"item": [
+				{
+					"name": "GetMember",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "bearer ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5001/api/members/bob-id",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"members",
+								"bob-id"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetMember With Bearer Token",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJvYkB0ZXN0LmNvbSIsIm5hbWVpZCI6ImNkODdiNzIxLWJlNmEtNDY1NC1hMGRhLTdlYmIzMzRmZDVhZCIsIm5iZiI6MTc2ODIxMTExMCwiZXhwIjoxNzY4ODE1OTEwLCJpYXQiOjE3NjgyMTExMTB9.2DmGLMA03jRNXdCiiKXfLqs7adWVUXNyauy9EUQ7Uw3bI0fnOQ0FCyNkR5WiA1RGre9K2tKbZsTduAEJbnHE0g",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/members/cd87b721-be6a-4654-a0da-7ebb334fd5ad",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"members",
+								"cd87b721-be6a-4654-a0da-7ebb334fd5ad"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetMembers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5001/api/members",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"members"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Section 4",
+			"item": [
+				{
+					"name": "Register User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"tom@test.com\",\r\n    \"displayName\": \"Tom\",    \r\n    \"password\": \"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/account/register",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"account",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register User Copy",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"bob2@test\",\r\n    \"displayName\": \"Bob2\",    \r\n    \"password\": \"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/account/register",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"account",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login as Bob",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"bob@test.com\",\r\n    \"password\": \"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/account/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"account",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register User query string",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"dave@test.com\",\r\n    \"displayName\": \"Dave\",    \r\n    \"password\": \"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/account/register?email=sam@test.com&displayName=Sam&password=password",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"account",
+								"register"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "sam@test.com"
+								},
+								{
+									"key": "displayName",
+									"value": "Sam"
+								},
+								{
+									"key": "password",
+									"value": "password"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Section 7",
+			"item": [
+				{
+					"name": "Get Server Error",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/buggy/server-error",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"buggy",
+								"server-error"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Auth Error",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/buggy/auth",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"buggy",
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get NotFound Error",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/buggy/not-found",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"buggy",
+								"not-found"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get BadRequest Error",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/buggy/bad-request",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"buggy",
+								"bad-request"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Section 8",
+			"item": [
+				{
+					"name": "GetMembers",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5001/api/members",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"members"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login as Lisa and save token to env",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Converte o body da resposta da API (JSON) em um objeto JavaScript\r",
+									"const user = pm.response.json();\r",
+									"\r",
+									"// Teste para validar se a resposta contém as propriedades esperadas\r",
+									"pm.test(\"Has properties\", function () {\r",
+									"    // Verifica se o objeto retornado possui a propriedade 'email'\r",
+									"    pm.expect(user).to.have.property('email');\r",
+									"\r",
+									"    // Verifica se o objeto retornado possui a propriedade 'token'\r",
+									"    pm.expect(user).to.have.property('token');\r",
+									"});\r",
+									"\r",
+									"// Verificação defensiva:\r",
+									"if (user && user.token) {\r",
+									"    // Salva o token retornado pela API em uma variável global do Postman\r",
+									"    // Isso permite reutilizar o token em outras requisições (ex: Authorization Bearer)\r",
+									"    pm.globals.set('token', user.token);\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"lisa@test.com\",\r\n    \"password\": \"Pa$$w0rd\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/account/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"account",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Member By Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/members/lisa-id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"members",
+								"lisa-id"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Photos",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/members/lisa-id/photos",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"members",
+								"lisa-id",
+								"photos"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Section 10",
+			"item": [
+				{
+					"name": "Login as Lisa and save token to env",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Converte o body da resposta da API (JSON) em um objeto JavaScript\r",
+									"const user = pm.response.json();\r",
+									"\r",
+									"// Teste para validar se a resposta contém as propriedades esperadas\r",
+									"pm.test(\"Has properties\", function () {\r",
+									"    // Verifica se o objeto retornado possui a propriedade 'email'\r",
+									"    pm.expect(user).to.have.property('email');\r",
+									"\r",
+									"    // Verifica se o objeto retornado possui a propriedade 'token'\r",
+									"    pm.expect(user).to.have.property('token');\r",
+									"});\r",
+									"\r",
+									"// Verificação defensiva:\r",
+									"if (user && user.token) {\r",
+									"    // Salva o token retornado pela API em uma variável global do Postman\r",
+									"    // Isso permite reutilizar o token em outras requisições (ex: Authorization Bearer)\r",
+									"    pm.globals.set('token', user.token);\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"lisa@test.com\",\r\n    \"password\": \"Pa$$w0rd\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/account/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"account",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"displayName\": \"Lisa 2\",\r\n    \"description\": \"Updated intro again\",\r\n    \"city\": \"Updated City\",\r\n    \"country\": \"Updated country\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/members",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"members"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Section 11",
+			"item": [
+				{
+					"name": "Login as Lisa and save token to env",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Converte o body da resposta da API (JSON) em um objeto JavaScript\r",
+									"const user = pm.response.json();\r",
+									"\r",
+									"// Teste para validar se a resposta contém as propriedades esperadas\r",
+									"pm.test(\"Has properties\", function () {\r",
+									"    // Verifica se o objeto retornado possui a propriedade 'email'\r",
+									"    pm.expect(user).to.have.property('email');\r",
+									"\r",
+									"    // Verifica se o objeto retornado possui a propriedade 'token'\r",
+									"    pm.expect(user).to.have.property('token');\r",
+									"});\r",
+									"\r",
+									"// Verificação defensiva:\r",
+									"if (user && user.token) {\r",
+									"    // Salva o token retornado pela API em uma variável global do Postman\r",
+									"    // Isso permite reutilizar o token em outras requisições (ex: Authorization Bearer)\r",
+									"    pm.globals.set('token', user.token);\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"lisa@test.com\",\r\n    \"password\": \"Pa$$w0rd\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/account/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"account",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add photo for user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "File",
+									"type": "file",
+									"src": "/C:/Users/cloud/Downloads/wonderwoman.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/members/add-photo",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"members",
+								"add-photo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Member by userId",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/members/lisa-id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"members",
+								"lisa-id"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Member photos by userId",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/members/lisa-id/photos",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"members",
+								"lisa-id",
+								"photos"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Section 13",
+			"item": [
+				{
+					"name": "Login as Lisa and save token to env",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Converte o body da resposta da API (JSON) em um objeto JavaScript\r",
+									"const user = pm.response.json();\r",
+									"\r",
+									"// Teste para validar se a resposta contém as propriedades esperadas\r",
+									"pm.test(\"Has properties\", function () {\r",
+									"    // Verifica se o objeto retornado possui a propriedade 'email'\r",
+									"    pm.expect(user).to.have.property('email');\r",
+									"\r",
+									"    // Verifica se o objeto retornado possui a propriedade 'token'\r",
+									"    pm.expect(user).to.have.property('token');\r",
+									"});\r",
+									"\r",
+									"// Verificação defensiva:\r",
+									"if (user && user.token) {\r",
+									"    // Salva o token retornado pela API em uma variável global do Postman\r",
+									"    // Isso permite reutilizar o token em outras requisições (ex: Authorization Bearer)\r",
+									"    pm.globals.set('token', user.token);\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"lisa@test.com\",\r\n    \"password\": \"Pa$$w0rd\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/account/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"account",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Member without Pagination",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/members/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"members",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Member whit Pagination",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/members?pageNumber=2&pageSize=2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"members"
+							],
+							"query": [
+								{
+									"key": "pageNumber",
+									"value": "2"
+								},
+								{
+									"key": "pageSize",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Users orderedby  lastActive",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/members?orderBy=lastActive",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"members"
+							],
+							"query": [
+								{
+									"key": "orderBy",
+									"value": "lastActive"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Section 14",
+			"item": [
+				{
+					"name": "Login as Lisa and save token to env",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Converte o body da resposta da API (JSON) em um objeto JavaScript\r",
+									"const user = pm.response.json();\r",
+									"\r",
+									"// Teste para validar se a resposta contém as propriedades esperadas\r",
+									"pm.test(\"Has properties\", function () {\r",
+									"    // Verifica se o objeto retornado possui a propriedade 'email'\r",
+									"    pm.expect(user).to.have.property('email');\r",
+									"\r",
+									"    // Verifica se o objeto retornado possui a propriedade 'token'\r",
+									"    pm.expect(user).to.have.property('token');\r",
+									"});\r",
+									"\r",
+									"// Verificação defensiva:\r",
+									"if (user && user.token) {\r",
+									"    // Salva o token retornado pela API em uma variável global do Postman\r",
+									"    // Isso permite reutilizar o token em outras requisições (ex: Authorization Bearer)\r",
+									"    pm.globals.set('token', user.token);\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"lisa@test.com\",\r\n    \"password\": \"Pa$$w0rd\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/account/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"account",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add like for todd from lola",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/likes/todd-id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"likes",
+								"todd-id"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Liked Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/likes?predicate=liked",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"likes"
+							],
+							"query": [
+								{
+									"key": "predicate",
+									"value": "liked"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Section 15",
+			"item": [
+				{
+					"name": "Login as Lisa and save token to env",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Converte o body da resposta da API (JSON) em um objeto JavaScript\r",
+									"const user = pm.response.json();\r",
+									"\r",
+									"// Teste para validar se a resposta contém as propriedades esperadas\r",
+									"pm.test(\"Has properties\", function () {\r",
+									"    // Verifica se o objeto retornado possui a propriedade 'email'\r",
+									"    pm.expect(user).to.have.property('email');\r",
+									"\r",
+									"    // Verifica se o objeto retornado possui a propriedade 'token'\r",
+									"    pm.expect(user).to.have.property('token');\r",
+									"});\r",
+									"\r",
+									"// Verificação defensiva:\r",
+									"if (user && user.token) {\r",
+									"    // Salva o token retornado pela API em uma variável global do Postman\r",
+									"    // Isso permite reutilizar o token em outras requisições (ex: Authorization Bearer)\r",
+									"    pm.globals.set('token', user.token);\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"lisa@test.com\",\r\n    \"password\": \"Pa$$w0rd\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/account/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"account",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login as Todd and save token to env",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Converte o body da resposta da API (JSON) em um objeto JavaScript\r",
+									"const user = pm.response.json();\r",
+									"\r",
+									"// Teste para validar se a resposta contém as propriedades esperadas\r",
+									"pm.test(\"Has properties\", function () {\r",
+									"    // Verifica se o objeto retornado possui a propriedade 'email'\r",
+									"    pm.expect(user).to.have.property('email');\r",
+									"\r",
+									"    // Verifica se o objeto retornado possui a propriedade 'token'\r",
+									"    pm.expect(user).to.have.property('token');\r",
+									"});\r",
+									"\r",
+									"// Verificação defensiva:\r",
+									"if (user && user.token) {\r",
+									"    // Salva o token retornado pela API em uma variável global do Postman\r",
+									"    // Isso permite reutilizar o token em outras requisições (ex: Authorization Bearer)\r",
+									"    pm.globals.set('token', user.token);\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"todd@test.com\",\r\n    \"password\": \"Pa$$w0rd\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/account/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"account",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Message From Lisa to Todd",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"recipientId\" : \"todd-id\",\r\n    \"content\": \"Teste message 2 from Lisa to Todd\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/messages",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"messages"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Message From Todd to Lisa",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"recipientId\" : \"lisa-id\",\r\n    \"content\": \"Teste message 1 from Todd to Lisa\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/messages",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"messages"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Default Messages for Lisa",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/messages",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"messages"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Outbox Messages for Lisa",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/messages?container=Outbox",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"messages"
+							],
+							"query": [
+								{
+									"key": "container",
+									"value": "Outbox"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Outbox Messages for Todd",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/messages?container=Outbox",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"messages"
+							],
+							"query": [
+								{
+									"key": "container",
+									"value": "Outbox"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Messages Thread between Lisa and Todd",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/messages?container=Outbox",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"messages"
+							],
+							"query": [
+								{
+									"key": "container",
+									"value": "Outbox"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Section 16",
+			"item": [
+				{
+					"name": "Get Admin secret",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/account/admin-secret",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"account",
+								"admin-secret"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Roles as Admin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{admin_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/admin/users-with-roles",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"users-with-roles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Roles as Lisa",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/admin/users-with-roles",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"users-with-roles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Photos to moderate as admin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{admin_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/admin/users-with-roles",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"users-with-roles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Roles for Lisa",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{admin_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/admin/edit-roles/lisa-id?roles=Moderator,Member",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"edit-roles",
+								"lisa-id"
+							],
+							"query": [
+								{
+									"key": "roles",
+									"value": "Moderator,Member"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login as Lisa and save token to env",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Converte o body da resposta da API (JSON) em um objeto JavaScript\r",
+									"const user = pm.response.json();\r",
+									"\r",
+									"// Teste para validar se a resposta contém as propriedades esperadas\r",
+									"pm.test(\"Has properties\", function () {\r",
+									"    // Verifica se o objeto retornado possui a propriedade 'email'\r",
+									"    pm.expect(user).to.have.property('email');\r",
+									"\r",
+									"    // Verifica se o objeto retornado possui a propriedade 'token'\r",
+									"    pm.expect(user).to.have.property('token');\r",
+									"});\r",
+									"\r",
+									"// Verificação defensiva:\r",
+									"if (user && user.token) {\r",
+									"    // Salva o token retornado pela API em uma variável global do Postman\r",
+									"    // Isso permite reutilizar o token em outras requisições (ex: Authorization Bearer)\r",
+									"    pm.globals.set('token', user.token);\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"lisa@test.com\",\r\n    \"password\": \"Pa$$w0rd\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/account/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"account",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login as admin",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Converte o body da resposta da API (JSON) em um objeto JavaScript\r",
+									"const user = pm.response.json();\r",
+									"\r",
+									"// Teste para validar se a resposta contém as propriedades esperadas\r",
+									"pm.test(\"Has properties\", function () {\r",
+									"    // Verifica se o objeto retornado possui a propriedade 'email'\r",
+									"    pm.expect(user).to.have.property('email');\r",
+									"\r",
+									"    // Verifica se o objeto retornado possui a propriedade 'token'\r",
+									"    pm.expect(user).to.have.property('token');\r",
+									"});\r",
+									"\r",
+									"// Verificação defensiva:\r",
+									"if (user && user.token) {\r",
+									"    // Salva o token retornado pela API em uma variável global do Postman\r",
+									"    // Isso permite reutilizar o token em outras requisições (ex: Authorization Bearer)\r",
+									"    pm.globals.set('admin_token', user.token);\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"admin@test.com\",\r\n    \"password\": \"Pa$$w0rd\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/account/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"account",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "https://localhost:5001"
+		}
+	]
+}
