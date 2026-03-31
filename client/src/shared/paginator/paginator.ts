@@ -13,7 +13,6 @@ export class Paginator {
   totalCount = input(0)
   totalPages = input(0)
   pageSizeOptions = input([5, 10, 20, 50])
-
   pageChange = output<{ pageNumber: number, pageSize: number }>()
 
   lastItemIndex = computed(() => {

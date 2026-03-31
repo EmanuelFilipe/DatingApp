@@ -29,7 +29,8 @@ jobs:
       - name: Install deps and build angular app
         run: |
           cd client
-          ng build
+          npm install
+          ng build --configuration production
 
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v4
