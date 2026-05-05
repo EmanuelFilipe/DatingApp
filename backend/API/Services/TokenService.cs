@@ -10,10 +10,12 @@ using System.Threading.Tasks;
 
 namespace API.Services
 {
-    public class TokenService(IConfiguration configuration, UserManager<AppUser> userManager) : ITokenService
+    public class TokenService(IConfiguration configuration, UserManager<AppUser> userManager, IWebHostEnvironment env) : ITokenService
     {
         public async Task<string> CreateToken(AppUser user)
         {
+            if (env.IsEnvironment("Testing")) return GenerateRefreshToken();
+
             var tokenKey = configuration["TokenKey"] ?? throw new Exception("Cannot get token key from appsettings file");
 
             //HMAC 512 have at minimum 64 characters

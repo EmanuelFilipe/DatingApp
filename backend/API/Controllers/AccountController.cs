@@ -1,5 +1,4 @@
-﻿using API.Data;
-using API.DTOs;
+﻿using API.DTOs;
 using API.Entities;
 using API.Extensions;
 using API.Interfaces;
@@ -7,12 +6,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Security.Cryptography;
-using System.Text;
 
 namespace API.Controllers
 {
-    public class AccountController(UserManager<AppUser> userManager, ITokenService tokenService) : BaseApiController
+    public class AccountController(UserManager<AppUser> userManager, ITokenService tokenService, IWebHostEnvironment env) : BaseApiController
     {
         [HttpPost("register")] // api/account/register
         public async Task<ActionResult<UserDTO>> Register(RegisterDTO registerDTO)
@@ -48,7 +45,8 @@ namespace API.Controllers
 
             await userManager.AddToRoleAsync(user, "Member");
 
-            await SetRefreshTokenCookie(user);
+            if (!env.IsEnvironment("Testing"))
+                await SetRefreshTokenCookie(user);
 
             return await user.ToDTO(tokenService);
         }

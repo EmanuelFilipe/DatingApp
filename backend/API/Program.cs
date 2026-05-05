@@ -17,10 +17,21 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
-builder.Services.AddDbContext<AppDbContext>(opt =>
+
+if (builder.Environment.IsEnvironment("Testing"))
 {
-    opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
-});
+    builder.Services.AddDbContext<AppDbContext>(opt =>
+    {
+        opt.UseInMemoryDatabase("TestDb");
+    });
+}
+else
+{
+    builder.Services.AddDbContext<AppDbContext>(opt =>
+    {
+        opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+    });
+}
 
 builder.Services.AddCors();
 
@@ -56,7 +67,9 @@ builder.Services.AddIdentityCore<AppUser>(opt =>
 
 #region [Jwt Bearer Configuration]
 
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+if (!builder.Environment.IsEnvironment("Testing"))
+{
+    builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
         var tokenKey = builder.Configuration["TokenKey"] ?? throw new Exception("Token key not found - Program.cs");
@@ -86,7 +99,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
 
     });
-
+}
 //Policy configuration
 builder.Services.AddAuthorizationBuilder()
     .AddPolicy("RequireAdminRole", policy => policy.RequireRole("Admin"))

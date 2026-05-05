@@ -1,3 +1,7 @@
+# execute the docker command to execute sqlserver image
+be on the directory:  D:\Cursos\Udemy\DatingApp> 
+docker compose up -d
+
 # daisyui
 https://daisyui.com/components/
 
