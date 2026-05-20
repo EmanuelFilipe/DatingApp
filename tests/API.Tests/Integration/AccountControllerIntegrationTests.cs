@@ -1,4 +1,5 @@
 ﻿using API.DTOs;
+using API.Tests.Fakes;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
@@ -19,25 +20,9 @@ namespace API.Tests.Integration
         public async Task Register_Should_Return_BadRequest_When_Password_Is_Too_Short()
         {
             // Arrange
-            var payload_OLD = new
-            {
-                displayName = "Filipe",
-                email = "filipe@email.com",
-                password = "123"
-            };
-
-            var payload = new
-            {
-                displayName = "Filipe",
-                email = "filipe@email.com",
-                password = "pa$",
-
-                gender = "Male",
-                city = "Belo Horizonte",
-                country = "Brazil",
-                dateOfBirth = new DateOnly(1990, 1, 1)
-            };
-
+            var payload = new UserFake().Generate();
+            payload.Password = "pa$";
+            
             // Act
             var response = await _client.PostAsJsonAsync(
                 "/api/account/register", payload);
@@ -59,17 +44,8 @@ namespace API.Tests.Integration
         public async Task Register_Should_Return_BadRequest_When_Email_Is_Not_Valid()
         {
             // Arrange
-            var payload = new
-            {
-                displayName = "Filipe",
-                email = "filipe@email",
-                password = "Pa$$w0rd1",
-
-                gender = "Male",
-                city = "Belo Horizonte",
-                country = "Brazil",
-                dateOfBirth = new DateOnly(1990, 1, 1)
-            };
+            var payload = new UserFake().Generate();
+            payload.Email = "filipe@email";
 
             // Act
             var response = await _client.PostAsJsonAsync(
@@ -136,17 +112,18 @@ namespace API.Tests.Integration
         public async Task Register_Should_Create_A_New_User_Without_Single_Error()
         {
             // Arrange
-            var payload = new
-            {
-                displayName = "Filipe1",
-                email = "filipe1@test.com",
-                password = "Pa$$w0rd1",
+            //var payload = new
+            //{
+            //    displayName = "Filipe1",
+            //    email = "filipe1@test.com",
+            //    password = "Pa$$w0rd1",
 
-                gender = "Male",
-                city = "Belo Horizonte",
-                country = "Brazil",
-                dateOfBirth = new DateOnly(1990, 1, 1)
-            };
+            //    gender = "Male",
+            //    city = "Belo Horizonte",
+            //    country = "Brazil",
+            //    dateOfBirth = new DateOnly(1990, 1, 1)
+            //};
+            var payload = new UserFake().Generate();
 
             // Act
             var response = await _client.PostAsJsonAsync(
